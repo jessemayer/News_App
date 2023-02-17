@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React, { createContext, useEffect, useState }  from 'react'
+import axios from 'axios'
 import './App.css';
+import { NewsContextProvider } from './NewsContext';
+import News from './components/News';
+import Navbar from './components/NavBar';
+import Home from './components/Pages/Home';
+import WallStreetJournal from './components/Pages/WallStreetJournal';
+import Business from './components/Pages/Business';
+import {TechCrunchProvider} from './components/Pages/TechCrunch';
+import { Route, Routes } from 'react-router-dom';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Navbar />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/TechCrunch' element={<TechCrunchProvider />} />
+            <Route path='/Business' element={<Business />} />
+            <Route path='/WallStreetJournal' element={<WallStreetJournal />} />
+          </Routes>
+        </div>
+
+     <NewsContextProvider>
+      <News />
+      
+    </NewsContextProvider> 
+    </>
   );
 }
 
